@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { ArquivoService } from './arquivo.service';
+import { NotaFiscalService } from './nota-fiscal.service';
 
 describe('ArquivoService', () => {
-  let service: ArquivoService;
+  let service: NotaFiscalService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(ArquivoService);
+    service = TestBed.inject(NotaFiscalService);
   });
 
   it('should be created', () => {

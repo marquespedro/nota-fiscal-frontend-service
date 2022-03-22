@@ -1,9 +1,10 @@
 <h1>Envio Nota Fiscal</h1>
-<p-fileUpload name="myfile[]" url="{{arquivoUrl}}" 
+<p-fileUpload name="file" url="{{arquivoUrl}}" 
         chooseLabel="Escolher"
         uploadLabel="Enviar"
         cancelLabel="Cancelar"
         accept="text/xml"
         invalidFileTypeMessageSummary="Arquivo inválido"
-        invalidFileTypeMessageDetail="favor anexar somente arquivo do tipo xml"></p-fileUpload>
+        invalidFileTypeMessageDetail="favor anexar somente arquivo do tipo xml"
+        (onUpload)="aposTerminarEnvioArquivo($event)"></p-fileUpload>
 

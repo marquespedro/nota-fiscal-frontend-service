@@ -11,6 +11,7 @@ import { NotaFiscalRoutingModule } from './nota-fiscal-routing.module';
 import { NotaFiscalUploadComponent } from './upload/nota-fiscal-upload.component';
 
 import {FileUploadModule} from 'primeng-lts/fileupload';
+import { ConfirmationService } from 'primeng-lts/api';
 
 
 @NgModule({
@@ -19,13 +20,12 @@ import {FileUploadModule} from 'primeng-lts/fileupload';
     CommonModule,
     ReactiveFormsModule,
     FormsModule,
-    HttpClientModule,
-
     FileUploadModule,
     InputTextModule,
     ButtonModule,
     TableModule,
     NotaFiscalRoutingModule
-  ]
+  ],
+  providers:[]
 })
 export class NotaFiscalModule { }
