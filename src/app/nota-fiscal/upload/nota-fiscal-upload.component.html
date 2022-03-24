@@ -1,4 +1,4 @@
-<h1>Envio Nota Fiscal</h1>
+<h1>Envio Nota Fiscal - Total Notas {{notas.length}}</h1>
 <p-fileUpload name="file" url="{{urlUpload}}" chooseLabel="Escolher" uploadLabel="Enviar" cancelLabel="Cancelar"
         accept="text/xml" invalidFileTypeMessageSummary="Arquivo inválido"
         invalidFileTypeMessageDetail="favor anexar somente arquivo do tipo xml"
@@ -27,7 +27,7 @@
                         <div style="padding-top: 15px;">
                                 <button pButton label="Duplicatas" icon="pi pi-search" class="p-button-sm"
                                         style="margin-right: 10px;" (click)="detalhar(nota)"></button>
-                                <button pButton label="Remover" icon="pi pi-trash"
+                                <button pButton label="Remover" icon="pi pi-trash" (click)="remover(nota)"
                                         class="p-button-danger p-button-sm"></button>
                         </div>
 

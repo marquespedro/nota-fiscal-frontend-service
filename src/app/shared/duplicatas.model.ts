@@ -1,6 +1,6 @@
 export class Duplicata {
-    id: number | undefined | null;
-    parcela: number | undefined;
-    valor: number | undefined;
-    dataVencimento: Date | undefined;
+    id: number;
+    parcela: number;
+    valor: number
+    dataVencimento: Date;
 }

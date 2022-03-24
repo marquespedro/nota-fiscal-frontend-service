@@ -17,4 +17,8 @@ export class NotaFiscalService {
   obterNotas(): Observable<NotaFiscal[]> {
     return this.http.get<NotaFiscal[]>(`${this.notasFiscaisUrl}`);
   }
+
+  remover(id: number) {
+    return this.http.delete<NotaFiscal[]>(`${this.notasFiscaisUrl}/${id}`);
+  }
 }

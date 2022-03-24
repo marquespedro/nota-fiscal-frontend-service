@@ -1,13 +1,13 @@
 import { Duplicata } from "./duplicatas.model";
 
 export class NotaFiscal {
-    id: number | undefined | null;
-    numero: string | undefined;
-    dhRegistro: Date | undefined;
-    nomeEmitente: string | undefined;
-    nomeDestinatario: string | undefined;
-    valorNota: number | undefined;
-    nomeArquivo: string | undefined;
-    status: string | undefined;
+    id: number;
+    numero: string;
+    dhRegistro: Date;
+    nomeEmitente: string ;
+    nomeDestinatario: string;
+    valorNota: number;
+    nomeArquivo: string;
+    status: string;
     duplicatas: Array<Duplicata> | [] = [];
 }

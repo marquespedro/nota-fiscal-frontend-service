@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-
+import { ConfirmationService, MessageService } from 'primeng-lts/api';
 import { NotaFiscalService } from 'src/app/nota-fiscal.service';
+import { NotaFiscal } from 'src/app/shared/nota-fiscal.model';
 import { environment } from 'src/environments/environment';
 
-import { MessageService } from 'primeng-lts/api';
-import { NotaFiscal } from 'src/app/shared/nota-fiscal.model';
+
 
 
 
@@ -28,23 +27,37 @@ export class NotaFiscalUploadComponent implements OnInit {
   constructor(
     private router: Router,
     private notaFiscalService: NotaFiscalService,
-    private messageService: MessageService) {
+    private messageService: MessageService,
+    private confirmationService : ConfirmationService) {
   }
 
   ngOnInit(): void {
+    this.consultarNotas();
+  }
+
+  consultarNotas() {
     this.notaFiscalService.obterNotas().subscribe(notas => {
       this.notas = notas;
     });
   }
 
   aposTerminarEnvioArquivo(event: any) {
-    if (event) {
-      this.messageService.add({ severity: 'success', summary: '', detail: 'Arquivo foi recepcionado com sucesso, dentro de instantes será processado!' });
-    }
+    this.messageService.add({ severity: 'success', summary: 'Envio Arquivo', 
+        detail: 'Arquivo foi recepcionado com sucesso, dentro de instantes será processado!' });
   }
 
-  detalhar(nota: NotaFiscal){
+  detalhar(nota: NotaFiscal) {
     this.display = true;
     this.notaSelecionada = nota;
+  }
+
+  remover(nota: NotaFiscal) {
+    this.confirmationService.confirm({
+      message: 'Desejar confirmar exclusão da nota fiscal?',
+      accept: () => {
+        this.notaFiscalService.remover(nota.id).subscribe(() => { });
+        this.notas = this.notas.filter(n => n.id != nota.id);
+      }
+  });
   }
 }
