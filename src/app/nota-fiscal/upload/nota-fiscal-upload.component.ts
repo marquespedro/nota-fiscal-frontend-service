@@ -6,6 +6,7 @@ import { NotaFiscalService } from 'src/app/nota-fiscal.service';
 import { environment } from 'src/environments/environment';
 
 import { MessageService } from 'primeng-lts/api';
+import { NotaFiscal } from 'src/app/shared/nota-fiscal.model';
 
 
 
@@ -16,30 +17,34 @@ import { MessageService } from 'primeng-lts/api';
 })
 export class NotaFiscalUploadComponent implements OnInit {
 
-  formularioPessoa: FormGroup = this.construirFormulario();
+  urlUpload = `${environment.urlApi}/notas-fiscais/upload`;
 
-  arquivoUrl = `${environment.urlApi}/notas-fiscais/upload`;
+  notas: Array<NotaFiscal> | [] = [];
 
-  constructor(private formBuilder: FormBuilder,
+  display = false;
+
+  notaSelecionada: NotaFiscal | undefined;
+
+  constructor(
     private router: Router,
     private notaFiscalService: NotaFiscalService,
     private messageService: MessageService) {
   }
 
   ngOnInit(): void {
-  }
-
-  construirFormulario() {
-    return this.formularioPessoa = this.formBuilder.group({
-      nome: ['', [Validators.required]],
-      sobrenome: ['', [Validators.required]]
+    this.notaFiscalService.obterNotas().subscribe(notas => {
+      this.notas = notas;
     });
   }
- 
 
-  aposTerminarEnvioArquivo(event:any) {
-    if(event){
-      this.messageService.add({ severity: 'success', summary: '', detail: 'Nota enviada com sucesso!'});
+  aposTerminarEnvioArquivo(event: any) {
+    if (event) {
+      this.messageService.add({ severity: 'success', summary: '', detail: 'Arquivo foi recepcionado com sucesso, dentro de instantes será processado!' });
     }
+  }
+
+  detalhar(nota: NotaFiscal){
+    this.display = true;
+    this.notaSelecionada = nota;
   }
 }

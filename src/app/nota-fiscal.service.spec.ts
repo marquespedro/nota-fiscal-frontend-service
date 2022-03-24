@@ -2,7 +2,7 @@ import { TestBed } from '@angular/core/testing';
 
 import { NotaFiscalService } from './nota-fiscal.service';
 
-describe('ArquivoService', () => {
+describe('NotaFiscalService', () => {
   let service: NotaFiscalService;
 
   beforeEach(() => {

@@ -1,10 +1,55 @@
 <h1>Envio Nota Fiscal</h1>
-<p-fileUpload name="file" url="{{arquivoUrl}}" 
-        chooseLabel="Escolher"
-        uploadLabel="Enviar"
-        cancelLabel="Cancelar"
-        accept="text/xml"
-        invalidFileTypeMessageSummary="Arquivo inválido"
+<p-fileUpload name="file" url="{{urlUpload}}" chooseLabel="Escolher" uploadLabel="Enviar" cancelLabel="Cancelar"
+        accept="text/xml" invalidFileTypeMessageSummary="Arquivo inválido"
         invalidFileTypeMessageDetail="favor anexar somente arquivo do tipo xml"
         (onUpload)="aposTerminarEnvioArquivo($event)"></p-fileUpload>
+<br>
+<p-table [value]="notas" responsiveLayout="scroll" *ngIf="notas.length > 0">
+        <ng-template pTemplate="header">
+                <tr>
+                        <th>Arquivo</th>
+                        <th>Chave</th>
+                        <th>Nome Emitente</th>
+                        <th>Nome Destinatario</th>
+                        <th>Valor Nota</th>
+                        <th>Status</th>
+                        <th></th>
+                </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-nota>
+                <tr>
+                        <td>{{nota.nomeArquivo}}</td>
+                        <td>{{nota.numero | slice:0:25}}...</td>
+                        <td>{{nota.nomeEmitente | slice:0:25}}...</td>
+                        <td>{{nota.nomeDestinatario}}</td>
+                        <td>{{nota.valorNota | currency:'BRL'}}</td>
+                        <td>{{nota.status}}</td>
+                        <div style="padding-top: 15px;">
+                                <button pButton label="Duplicatas" icon="pi pi-search" class="p-button-sm"
+                                        style="margin-right: 10px;" (click)="detalhar(nota)"></button>
+                                <button pButton label="Remover" icon="pi pi-trash"
+                                        class="p-button-danger p-button-sm"></button>
+                        </div>
 
+                </tr>
+        </ng-template>
+</p-table>
+
+<p-dialog header="Detalhe Duplicata" position="center" [(visible)]="display" [style]="{width: '50vw'}">
+        <p-table [value]="notaSelecionada.duplicatas" responsiveLayout="scroll" *ngIf="notaSelecionada">
+                <ng-template pTemplate="header">
+                        <tr>
+                                <th>Parcela</th>
+                                <th>Valor</th>
+                                <th>Data Vencimento</th>
+                        </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-duplicata>
+                        <tr>
+                                <td>{{duplicata.parcela}}</td>
+                                <td>{{duplicata.valor | currency:'BRL'}}</td>
+                                <td>{{duplicata.dataVencimento}}</td>
+                        </tr>
+                </ng-template>
+        </p-table>
+</p-dialog>

@@ -12,9 +12,7 @@ const rotas: Routes = [
   imports: [
     RouterModule.forChild(rotas)
   ],
-  exports: [
-    RouterModule
-  ]
+  exports: []
 })
 
 export class NotaFiscalRoutingModule { }
